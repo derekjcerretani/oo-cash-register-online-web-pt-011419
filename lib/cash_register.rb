@@ -2,20 +2,28 @@ require 'pry'
 
 class CashRegister
 
-  attr_accessor :total, :discount, :last_transaction
+  attr_accessor :items, :total, :discount, :last_transaction
 
   def initialize(discount = nil)
     @total = 0
     @discount = discount
-    @@new_items = []
+    @items = []
   end
 
   def add_item(title, price, quantity = 1)
+    #my answer
     for each in (1..quantity)
-      @@new_items << title
+      @items << title
     end
     @last_transaction = price
     @total = @total + (price * quantity)
+
+    #Solution
+    #self.total += amount * quantity
+    #quantity.times do
+    # items << title
+    #end
+    #self.last_transaction = amount * quantity
   end
 
   def apply_discount
@@ -25,14 +33,23 @@ class CashRegister
     else
       "There is no discount to apply."
     end
-  end
 
+    #if discount != 0
+     #self.total = (total * ((100.0 - discount.to_f)/100)).to_i
+     #{}"After the discount, the total comes to $#{self.total}."
+   #else
+     #{}"There is no discount to apply."
+   #end
+
+  end
+  # Unncessary method with an :items reader defined.
   def items
-    @@new_items
+    @items
   end
 
   def void_last_transaction
     @total = @total - @last_transaction
+    #self.total = self.total - self.last_transaction
   end
 
 end
